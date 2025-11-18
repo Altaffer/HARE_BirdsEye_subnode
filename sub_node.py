@@ -52,7 +52,7 @@ class subscriberNode(rclpy.node.Node):
         self.dir_name = os.path.join(os.path.expanduser('~'), self.dir_name)
         self.dirCheck()
 
-        # db connector
+        # db connector 
         self.declare_parameter("db_name", 'flight_data')
         self.db_name = self.get_parameter("db_name").value
         self.dbc = dbConnector.dbConnector(os.path.join(self.dir_name, self.db_name))
