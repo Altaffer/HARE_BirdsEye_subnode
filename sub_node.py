@@ -1,5 +1,26 @@
 #!/usr/bin/env python3
 
+"""
+@file   sub_node.py
+
+Postprocessing subscriber node to extract data from ROS2-based bag for BirdsEye implementation.
+Listens to camera images, INS data, radar-altimeter readings, and IMU data, 
+then synchonizes them into a unified data record to disk and SQLite3 based database.
+
+This module also requires data from the sensor-calibration YAML and geotag coordinates from its CSV. 
+
+Each time an image arrives with a valid INS strobe and altitude reading, the node converts the raw image,
+extracts UTM-based pose data, evaluates RTK and INS status flags, and writes the image file and associated metadata as a single atomic entry. 
+
+The system maintains full message history with a custom QoS profile, ensuring no data is dropped during high-rate flight logging.
+
+@author HARE Lab - Luca Altaffer
+
+@date   17 May 2024
+@todo
+    *
+"""
+
 import csv
 import yaml
 import utm
